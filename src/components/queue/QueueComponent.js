@@ -5,6 +5,9 @@ export default class QueueComponent {
         eventEmmitter.on('QueueRender', (parent, count) => {
            this.render(parent, count);
         });
+        eventEmmitter.on('QueueUpdate', (parent, count) => {
+           this.update(parent, count);
+        });
 
     }
     create (count) {
@@ -15,7 +18,8 @@ export default class QueueComponent {
         parent.innerHTML = this.create(count);
 
     }
-    update () {
-
+    update (parent, count) {
+        let child = parent.firstChild;
+        child.innerHTML = count;
     }
 }

@@ -7,36 +7,48 @@ export default class Queue {
         this.count = 0;
         eventEmmitter.on('AtmIsFree', () => {
                 this.movePerson();
-                console.log('atmIsFree')
+                // console.log('in emit AtmIsFree')
         } );
-    }
-    addPerson () {
-        this.count++;
-        console.log(this.count)
     }
 
     movePerson () {
         if(this.count > 0) {
-            // setTimeout(() => {
+            setTimeout(() => {
                 this.count -= 1;
-                eventEmmitter.emit('personEntred');
-            // }, 1000)
+                eventEmmitter.emit('QueueUpdate', this.parent, this.count);
+                // console.log('emit continueWorking')
+                eventEmmitter.emit('continueWorking');
+            }, 1000)
 
-        } else {
-
+        }
+        if(this.count === 0){
+            return 0;
         }
 
     }
+    addPerson () {
+        this.count++;
+        eventEmmitter.emit('QueueUpdate', this.parent, this.count);
+        // console.log(this.count)
+    }
 
     startAddPerson () {
-
         setInterval( () => {
             this.addPerson();
+            if(this.count === 1) {
+                // console.log('count >=1')
+                eventEmmitter.emit('start');
+            }
+            if(this.count <=0){
+                return;
+            }
+
         }, generateRandomSec(2, 4))
     }
 
     init() {
         eventEmmitter.emit('QueueRender', this.parent, this.count);
+        // console.log('start add person', this.count)
         this.startAddPerson();
     }
 
