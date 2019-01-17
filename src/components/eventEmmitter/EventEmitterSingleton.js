@@ -1,13 +1,39 @@
-const events = require("events"),
-  EventEmitter = events.EventEmitter;
+// const events = require("events"),
+//   EventEmitter = events.EventEmitter;
+//
+// const emitter = function() {
+//   if (arguments.callee._singletonInstance)
+//     return arguments.callee._singletonInstance;
+//   arguments.callee._singletonInstance = this;
+//   EventEmitter.call(this);
+// };
+//
+// emitter.prototype.__proto__ = EventEmitter.prototype;
+//
+// module.exports = new emitter();
 
-const emitter = function() {
-  if (arguments.callee._singletonInstance)
-    return arguments.callee._singletonInstance;
-  arguments.callee._singletonInstance = this;
-  EventEmitter.call(this);
-};
+export default class EventEmmitter {
+  constructor () {
+    this.eventTable = {}
+  }
 
-emitter.prototype.__proto__ = EventEmitter.prototype;
+  on (eventName, fn) {
+    if (!this.eventTable[eventName]) {
+      this.eventTable[eventName] = []
+    }
+    this.eventTable[eventName].push(fn)
 
-module.exports = new emitter();
+    var self = this
+    return function () {
+      self.eventTable[eventName] = self.eventTable[eventName].filter(eventFunc => { return fn !== eventFunc })
+    }
+  }
+  emit (eventName, ...params) {
+    const event = this.eventTable[eventName]
+    if (event) {
+      event.map(fn => {
+        return fn.call(this, params)
+      })
+    }
+  }
+}
