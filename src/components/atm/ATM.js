@@ -1,6 +1,6 @@
 import eventEmmitter from '../eventEmmitter/EventEmitterSingleton'
 import generateRandomSec from '../others/generateRandomSec'
-
+console.log()
 export default class ATM {
   constructor (id, parent) {
     this.id = id
