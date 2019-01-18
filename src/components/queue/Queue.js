@@ -5,15 +5,15 @@ import generateRandomSec from '../others/generateRandomSec'
 export default class Queue {
   constructor (parent) {
     this.parent = parent;
-    this.count = 1;
+    this.count = 0;
   }
 
-  movingPerson () {
-    if(this.count > 0){
-      console.log(this.count, 'start findFreeAtm')
-      eventEmmitter.emit('findFreeAtm');
-    }
-  }
+  // movingPerson () {
+  //   if(this.count > 0){
+  //     console.log(this.count, 'start findFreeAtm')
+  //     eventEmmitter.emit('findFreeAtm');
+  //   }
+  // }
 
   movePerson () {
     this.count -= 1;
@@ -34,7 +34,7 @@ export default class Queue {
   init () {
     eventEmmitter.emit('QueueRender', this.parent, this.count);
     this.startAddPerson();
-    this.movingPerson();
+    // this.movingPerson();
   }
 
 }
