@@ -1,48 +1,55 @@
-import eventEmmitter from '../eventEmmitter/EventEmitterSingleton'
+import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import generateRandomSec from '../others/generateRandomSec'
+
 
 export default class Queue {
   constructor (parent) {
-    this.parent = parent
-    this.count = 0
-    eventEmmitter.on('AtmIsFree', () => {
-      this.movePerson()
+    this.parent = parent;
+    this.count = 0;
+    let usatm = eventEmmitter.on('AtmIsFree', () => {
+      console.log('atm isfree green 1c')
+
+      if(this.count > 0) {
+        console.log('queue minus person')
+        this.movePerson();
+        eventEmmitter.emit('QueueUpdate', this.parent, this.count);
+        if(this.count > 0) {
+          console.log('queue count > 0 continueWorking ')
+          eventEmmitter.emit('continueWorking');
+        }
+      }
+      if(this.count === 0) {
+        console.log('queueCount is 0 usatm')
+        usatm();
       // console.log('in emit AtmIsFree')
-    })
+      }
+  })
   }
 
   movePerson () {
-    if (this.count > 0) {
-      setTimeout(() => {
-        // console.log('movePerson')
-        this.count -= 1
-        // console.log('moveperson', this.count)
-        eventEmmitter.emit('QueueUpdate', this.parent, this.count)
-        // console.log('emit continueWorking')
-        eventEmmitter.emit('continueWorking')
-      }, 1000)
+        this.count -= 1;
     }
-    if (this.count === 0) {
-      return 0
-    }
-  }
+
   addPerson () {
-    this.count++
+    this.count++;
     eventEmmitter.emit('QueueUpdate', this.parent, this.count)
   }
 
   startAddPerson () {
     setInterval(() => {
-      // console.log('setinterval addPerson')
-      this.addPerson()
-      // console.log("startAddPerson", this.count)
-      eventEmmitter.emit('start', this.count)
-    }, 1000)
+      this.addPerson();
+      if(this.count > 0) {
+        console.log(this.count)
+        eventEmmitter.emit('start', this.count);
+      }
+    }, generateRandomSec(2, 4))
   }
 
   init () {
-    eventEmmitter.emit('QueueRender', this.parent, this.count)
+    eventEmmitter.emit('QueueRender', this.parent, this.count);
     // console.log('start add person', this.count)
     this.startAddPerson()
   }
+
 }
+

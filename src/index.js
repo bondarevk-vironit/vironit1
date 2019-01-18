@@ -2,28 +2,26 @@ import ATM from './components/atm/ATM'
 import AtmComponent from './components/atm/AtmComponent'
 import Queue from './components/queue/Queue'
 import QueueComponent from './components/queue/QueueComponent'
-import './styles/main.css'
+import './style.css'
+let i = 0;
+let atmsArr = [];
+let countOfAtms = 2;
+let atmContainer = document.getElementById('atmContainer');
+let queueContainer = document.getElementById('queueContainer');
 
-let atmContainer = document.createElement('div')
-atmContainer.id = 'atmContainer'
-let queueContainer = document.createElement('div')
-queueContainer.id = 'queueContainer'
+function createAtm (countOfAtms) {
+    for(var j = 0; j < countOfAtms; j++){
+        atmsArr.push(new ATM('atm'+ ++i, atmContainer));
+    }
+    atmsArr.forEach(atm => {
+        atm.init();
+    })
+}
+let atmComponent = new AtmComponent();
 
-document.body.appendChild(atmContainer)
-document.body.appendChild(queueContainer)
+let queue = new Queue(queueContainer);
+let queueComponent = new QueueComponent();
 
-let atm1 = new ATM('atm1', atmContainer)
-// let atm2 = new ATM('atm2', atmContainer);
-let queue = new Queue(queueContainer)
+createAtm (countOfAtms);
+queue.init();
 
-// console.log(atm1);
-// console.log(atm2);
-
-// console.log(queue);
-let atmComponent = new AtmComponent()
-let queueComponent = new QueueComponent()
-// console.log(queueComponent);
-
-atm1.init()
-// atm2.init();
-queue.init()
