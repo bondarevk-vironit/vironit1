@@ -25,10 +25,15 @@ let queueComponent = new QueueComponent();
 
 events.queue.init();
 
+setInterval( () => {
+    console.log(events.queue.count)
+    events.queue.checkFreeAtm();
+}, 1000);
+
+
 
 events.atmsArr.forEach(atm => {
     atm.init();
 });
 
-// createAtm(atmsArr, queue);
 

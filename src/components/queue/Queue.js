@@ -7,34 +7,31 @@ export default class Queue {
     this.parent = parent;
     this.count = 0;
   }
-
-  // movingPerson () {
-  //   if(this.count > 0){
-  //     console.log(this.count, 'start findFreeAtm')
-  //     eventEmmitter.emit('findFreeAtm');
-  //   }
-  // }
-
-  movePerson () {
-    this.count--;
-    eventEmmitter.emit('QueueUpdate', this.parent, this.count)
-    }
-
   addPerson () {
     this.count++;
     eventEmmitter.emit('QueueUpdate', this.parent, this.count)
   }
 
+  movePerson () {
+      this.count--;
+      eventEmmitter.emit('QueueUpdate', this.parent, this.count)
+    }
+
+    checkFreeAtm () {
+      if(this.count > 0) {
+        eventEmmitter.emit('findFreeAtm');
+      }
+    }
+
   startAddPerson () {
     setInterval(() => {
       this.addPerson();
-    }, generateRandomSec(2, 4))
+    }, generateRandomSec(2, 4));
   }
 
   init () {
     eventEmmitter.emit('QueueRender', this.parent, this.count);
     this.startAddPerson();
-    // this.movingPerson();
   }
 
 }

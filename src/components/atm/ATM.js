@@ -8,55 +8,34 @@ export default class ATM {
     this.id = id;
     this.parent = parent;
     this.count = 0;
-    this.state = 'free';
+    this.isFree = true;
   }
 
-  changeStatus () {
-    eventEmmitter.emit('findFreeAtm', this.state);
-    console.log(this.state, this.id ,"after find freeATM")
-    if(this.state === 'busy') {
-      console.log('emit busy', this.state)
+  serviseByisFree () {
+    if(!this.isFree) {
+      eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.isFree);
 
-      //eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.state);
-
-      eventEmmitter.emit('busyState');
+      eventEmmitter.emit('atmIsFree');
     }
-    else {
-      console.log('emit free', this.state)
-
-      eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.state);
-      eventEmmitter.emit('freeState');
+    if(this.isFree){
+      eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.isFree);
+      console.log('startBusy');
+      eventEmmitter.emit('atmIsBusy', this);
     }
   }
   addPerson () {
     this.count++
   }
-  startServise (queue) {
-    this.state = 'busy';
-    this.addPerson();
-    queue.movePerson();
-    eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.state);
+  startServise () {
     setTimeout( () => {
-    console.log('start servise', this.state)
-
-      this.serviseOut();
+      this.isFree = true;
+      console.log('Im isFree again')
+      eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.isFree);
     }, generateRandomSec(1, 3) );
   }
 
-  serviseOut () {
-    console.log('serviceout', this.state)
-    this.state = 'free';
-    eventEmmitter.emit('AtmUpdate', this.id, this.parent, this.count, this.state);
-    setTimeout(() => {
-      this.changeStatus();
-    },1000);
-
-
-  }
-
   init () {
-    eventEmmitter.emit('AtmRender', this.id, this.parent, this.count, this.state);
-    this.changeStatus();
+    eventEmmitter.emit('AtmRender', this.id, this.parent, this.count, this.isFree);
   }
 
 }
