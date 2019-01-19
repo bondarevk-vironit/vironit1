@@ -12,7 +12,7 @@ export default class ATM {
   }
 
   changeStatus () {
-    eventEmmitter.emit('findFreeAtm');
+    eventEmmitter.emit('findFreeAtm', this.state);
     console.log(this.state, this.id ,"after find freeATM")
     if(this.state === 'busy') {
       console.log('emit busy', this.state)

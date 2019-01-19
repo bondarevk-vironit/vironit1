@@ -16,7 +16,7 @@ export default class Queue {
   // }
 
   movePerson () {
-    this.count -= 1;
+    this.count--;
     eventEmmitter.emit('QueueUpdate', this.parent, this.count)
     }
 
