@@ -1,9 +1,9 @@
 .atm, .counter {
     border: 1px solid black;
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
     display: inline-block;
-    margin: 20px;
+    margin: 15px 0 0 -1px;
 }
 #atmContainer {
     display: flex;
@@ -16,17 +16,40 @@
 }
 .atm {
     background-color: grey;
+    margin-left: 10px;
 }
 .counter {
-    width: 100px;
-    height: 100px;
+    height: 20%;
+    text-align: center;
+    padding-top: 10%;
 }
 .queueContainer {
     border: 1px solid black;
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 70px;
     margin: 0 auto;
+    margin-top: 40px;
+    padding-top: 50px;
+    text-align: center;
 }
 p {
     text-align: center;
+}
+#addBtn {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    left: 10px;
+    right: 0;
+    top: 10px;
+    bottom: 0;
+}
+.deleteAtmBtn {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    right: 0;
+    left: 82%;
+    top: 4%;
+    bottom: 0;
 }

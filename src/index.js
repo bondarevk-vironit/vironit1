@@ -5,19 +5,15 @@ import Queue from './components/queue/Queue'
 import QueueComponent from './components/queue/QueueComponent'
 import './style.css'
 import * as events from "./components/utils/events";
+import generateRandomSec from "./components/others/generateRandomSec";
+import AddAtmBtm from "./components/deleteAtmBtn/DeleteAtmBtn";
 
-let countOfAtms = 1;
+import createAtm, {atmsArr} from "./components/utils/events"
+import eventEmmitter from "./components/eventEmmitter/EventEmmitter";
+
 let atmContainer = document.getElementById('atmContainer');
 let queueContainer = document.getElementById('queueContainer');
 
-
-
-
-
-
-console.log(events.atmsArr)
-
-let atmComponent = new AtmComponent();
 
 // let queue = new Queue(queueContainer);
 let queueComponent = new QueueComponent();
@@ -25,15 +21,22 @@ let queueComponent = new QueueComponent();
 
 events.queue.init();
 
+
+    setInterval(() => {
+        events.queue.addPerson();
+    }, generateRandomSec(2, 4));
+
+
 setInterval( () => {
-    console.log(events.queue.count)
+    // console.log(events.queue.count)
     events.queue.checkFreeAtm();
 }, 1000);
 
 
 
-events.atmsArr.forEach(atm => {
-    atm.init();
-});
+// events.atmsArr.forEach(atm => {
+//     atm.init();
+// });
 
 
+console.log(atmsArr)

@@ -23,15 +23,8 @@ export default class Queue {
       }
     }
 
-  startAddPerson () {
-    setInterval(() => {
-      this.addPerson();
-    }, generateRandomSec(2, 4));
-  }
-
   init () {
     eventEmmitter.emit('QueueRender', this.parent, this.count);
-    this.startAddPerson();
   }
 
 }

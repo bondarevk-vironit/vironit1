@@ -1,8 +1,11 @@
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
+import DeleteAtmBtnComponent from "../deleteAtmBtn/DeleteAtmBtnComponent";
 
 export default class AtmComponent {
-  constructor () {
+  constructor (id) {
+    this.id = id;
     this.atms = {};
+    this.deleteBtn = new DeleteAtmBtnComponent();
     eventEmmitter.on('AtmRender', (id, parent, count, isFree) => {
        this.render(id, parent, count, isFree);
     });
@@ -11,7 +14,7 @@ export default class AtmComponent {
     })
   }
   create (count, id, isFree) {
-    return `<div id="${id}" class="atm"><div class="counter" style="background-color: ${isFree === true ? 'lightgreen' : 'red'}">${count}</div></div>`
+    return `<div id="${id}" class="atm">${this.deleteBtn.create({click: () => this.deleteBtn.deleteAtm(this.id)})}<div class="counter" style="background-color: ${isFree === true ? 'lightgreen' : 'red'}">${count}</div></div>`
   }
   render (id, parent, count, isFree) {
     this.atms[id] = this.create(count, id, isFree);
