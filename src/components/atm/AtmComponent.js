@@ -1,11 +1,14 @@
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import DeleteAtmBtnComponent from "../deleteAtmBtn/DeleteAtmBtnComponent";
+import DeleteAtmBtn from "../deleteAtmBtn/DeleteAtmBtn";
+import CommonComponent from "../commonComponent/CommonComponent";
 
 export default class AtmComponent {
   constructor (id) {
     this.id = id;
     this.atms = {};
-    this.deleteBtn = new DeleteAtmBtnComponent();
+    this.common = new CommonComponent();
+    this.deleteBtn = new DeleteAtmBtn(this.id, this);
     eventEmmitter.on('AtmRender', (id, parent, count, isFree) => {
        this.render(id, parent, count, isFree);
     });
@@ -13,12 +16,13 @@ export default class AtmComponent {
       this.update(id, parent, count, isFree)
     })
   }
+  // ${this.deleteBtn.renderBtn.create(eventEmmitter.on('closeAtm', () => {this.deleteBtn.renderBtn.deleteAtm(this.id) }))}
   create (count, id, isFree) {
-    return `<div id="${id}" class="atm">${this.deleteBtn.create({click: () => this.deleteBtn.deleteAtm(this.id)})}<div class="counter" style="background-color: ${isFree === true ? 'lightgreen' : 'red'}">${count}</div></div>`
+    return `<div id="${id}" class="atm"><div class="counter" style="background-color: ${isFree === true ? 'lightgreen' : 'red'}">${count}</div></div>`
   }
   render (id, parent, count, isFree) {
     this.atms[id] = this.create(count, id, isFree);
-    parent.innerHTML += this.create(count, id, isFree);
+    console.log(this.common.strToDom(this.create(count, id, isFree)));
 
     this.atms[id] = this.create(count, id, isFree)
   }

@@ -12,7 +12,7 @@ export default class ATM {
     this.count = 0;
     this.isFree = true;
     this.renderAtm = new AtmComponent(this.id, this.parent, this.count, this.isFree);
-    this.deleteBtn = new DeleteAtmBtn(this.id);
+    this.deleteBtn = new DeleteAtmBtn(this.id, this);
   }
 
   serviseByisFree () {

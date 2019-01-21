@@ -22,15 +22,15 @@ let queueComponent = new QueueComponent();
 events.queue.init();
 
 
-    setInterval(() => {
-        events.queue.addPerson();
-    }, generateRandomSec(2, 4));
-
-
-setInterval( () => {
-    // console.log(events.queue.count)
-    events.queue.checkFreeAtm();
-}, 1000);
+//     setInterval(() => {
+//         events.queue.addPerson();
+//     }, generateRandomSec(2, 4));
+//
+//
+// setInterval( () => {
+//     // console.log(events.queue.count)
+//     events.queue.checkFreeAtm();
+// }, 1000);
 
 
 

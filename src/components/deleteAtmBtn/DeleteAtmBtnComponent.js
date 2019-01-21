@@ -1,15 +1,27 @@
-
+import DeleteAtmBtn from "../deleteAtmBtn/DeleteAtmBtn";
+import eventEmmitter from "../eventEmmitter/EventEmmitter";
+import CommonComponent from "../commonComponent/CommonComponent";
 
 export default class DeleteAtmBtnComponent {
-    constructor() {
+    constructor( parent ) {
+        this.parent = parent;
+        this.commonComponent = new CommonComponent();
+    }
+    render (  ) {
+        // this.element.addEventListener('click', this.setOnClick.bind(this));
+        this.parent.innerHTML = this.commonComponent.strToDom(this.create());
+    }
+
+    create () {
+        return `<button class="deleteAtmBtn">x</button>`
+    }
+    setOnClick () {
+        console.log(this.element)
+            eventEmmitter.emit('closeAtm');
 
     }
-    render (id, parent) {
-        parent.innerHTML += this.create(id);
-    }
 
-    create (id) {
-        return `<button id="${id}" class="deleteAtmBtn">x</button>`
-    }
+
+
 
 }

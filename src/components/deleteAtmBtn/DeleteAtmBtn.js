@@ -1,10 +1,12 @@
 import {atmsArr} from "../utils/events";
 import DeleteAtmBtnComponent from "./DeleteAtmBtnComponent";
+import eventEmmitter from '../eventEmmitter/EventEmmitter'
 
 class DeleteAtmBtn {
-    constructor () {
-
-      this.renderBtn = new DeleteAtmBtnComponent();
+    constructor (id, parent) {
+        this.id = id;
+        this.parent = parent;
+      this.renderBtn = new DeleteAtmBtnComponent(id, parent);
     }
 deleteAtm (id) {
    atmsArr.splice(id, 1);
@@ -12,7 +14,6 @@ deleteAtm (id) {
 
 
 }
-
 
 
 export default DeleteAtmBtn;
