@@ -11,8 +11,8 @@ let queue = new Queue(queueContainer);
 
 export default function createAtm () {
         let newATM = new ATM('atm' + ++i, atmContainer);
-        newATM.renderAtm.render(newATM.id, newATM.parent, newATM.count, newATM.isFree);
-        newATM.deleteBtn.renderBtn.render(newATM.id, newATM);
+        newATM.renderAtm.render(newATM.id, newATM.parent, newATM.isFree);
+        eventEmmitter.emit('renderCounter', newATM.isFree, newATM.renderAtm.counterAtm.countAtm);
         return newATM;
     }
 
@@ -30,9 +30,11 @@ eventEmmitter.on('atmIsBusy', (atm) => {
     atm.isFree = false;
     // console.log(queue.count)
     queue.movePerson();
-    // console.log(queue.count)
-    atm.addPerson();
-    eventEmmitter.emit('AtmUpdate', atm.id, atm.parent, atm.count, atm.isFree);
+    eventEmmitter.emit('QueueUpdate', queue.parent, queue.count);
+    eventEmmitter.emit('addPerson', atm)
+    //atm.renderAtm.counterAtm.addPerson();
+    eventEmmitter.emit('updateCounter', atm.isFree, atm.renderAtm.counterAtm.countAtm, atm);
+    //eventEmmitter.emit('AtmUpdate', atm.id, atm.parent, atm.count, atm.isFree);
     setTimeout( () => {
         atm.serviseByisFree();
     }, generateRandomSec(1, 3) );
@@ -40,8 +42,9 @@ eventEmmitter.on('atmIsBusy', (atm) => {
 eventEmmitter.on('atmIsFree', (atm) => {
     setTimeout(() => {
         atm.isFree = true;
-        eventEmmitter.emit('AtmUpdate', atm.id, atm.parent, atm.count, atm.isFree);
-        // console.log('Im isFree again')
+        eventEmmitter.emit('updateCounter', atm.isFree, atm.renderAtm.counterAtm.countAtm, atm);
+       // eventEmmitter.emit('AtmUpdate', atm.id, atm.parent, atm.count, atm.isFree);
+       //  console.log('Im isFree again')
     }, 1000)
 });
 

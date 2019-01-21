@@ -1,15 +1,19 @@
 import {atmsArr} from "../utils/events";
 import DeleteAtmBtnComponent from "./DeleteAtmBtnComponent";
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
+import CommonComponent from "../commonComponent/CommonComponent";
 
 class DeleteAtmBtn {
-    constructor (id, parent) {
+    constructor ( id ) {
         this.id = id;
-        this.parent = parent;
-      this.renderBtn = new DeleteAtmBtnComponent(id, parent);
+        this.renderBtn = new DeleteAtmBtnComponent(  );
+        this.commonComponent = new CommonComponent();
+        this.element = this.commonComponent.findIndex(this.id);
     }
-deleteAtm (id) {
-   atmsArr.splice(id, 1);
+deleteAtm () {
+
+   atmsArr.splice(+this.element -1, 1);
+    console.log(atmsArr)
 }
 
 

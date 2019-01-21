@@ -7,17 +7,18 @@ export default class CommonComponent {
 
     strToDom(template) {
         let [ , openTag, content,  ] = /<(.+?)>(.+)<\/.+>/.exec(template);
-        console.log(openTag);
-        console.log(content);
         let tagName = /\w+/.exec(openTag);
-        console.log(tagName[0]);
         let element = document.createElement(tagName[0]);
-        let params = /(.+?\s(.+?))="(.+?)"/g;
+        let params = /\s(.+?)="(.+?)"/g;
         let paramsRes;
         while(paramsRes = params.exec(openTag)){
-            element.setAttribute(paramsRes[2], paramsRes[3]);
+            element.setAttribute(paramsRes[1], paramsRes[2]);
         }
         element.innerHTML = content.trim();
         return element;
+    }
+
+    findIndex (id) {
+        return /\d/.exec(id);
     }
 }

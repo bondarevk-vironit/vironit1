@@ -19,6 +19,7 @@ export default class Queue {
 
     checkFreeAtm () {
       if(this.count > 0) {
+        // console.log('queue check if atm is free')
         eventEmmitter.emit('findFreeAtm');
       }
     }
