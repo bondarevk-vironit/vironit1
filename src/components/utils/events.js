@@ -1,3 +1,4 @@
+import axios from 'axios'
 import ATM from '../atm/ATM'
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import Queue from '../queue/Queue'
@@ -11,6 +12,11 @@ let queue = new Queue(queueContainer)
 export default function createAtm () {
   let newATM = new ATM('atm' + ++i, atmContainer)
   newATM.renderAtm.render(newATM.id, newATM.parent, newATM.isFree)
+  // axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+  //   .then(res => {
+  //     alert(res.data.bitcoin.usd)
+  //   })
+
   eventEmmitter.emit('renderCounter', newATM.isFree, newATM.renderAtm.counterAtm.countAtm)
   return newATM
 }
@@ -45,10 +51,8 @@ function createATMwithFunc (create) {
   atmsArr.push(atm)
 }
 
-window.addEventListener('click', (e) => {
-  if (e.target === document.getElementById('addBtn')) {
-    createATMwithFunc(createAtm)
-  }
+document.getElementById('addBtn').addEventListener('click', () => {
+  createATMwithFunc(createAtm)
   console.log(atmsArr)
 })
 

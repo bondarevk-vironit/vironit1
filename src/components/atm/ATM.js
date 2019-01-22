@@ -1,5 +1,6 @@
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import AtmComponent from './AtmComponent'
+import {atmsArr} from "../utils/events";
 
 export default class ATM {
   constructor (id, parent) {
@@ -7,11 +8,9 @@ export default class ATM {
     this.parent = parent
     this.isFree = true
     this.renderAtm = new AtmComponent(this.id, this.parent)
-
-    // eventEmmitter.on('deleteAtm', (parent, item) => {
-    //   item.deleteAtm(this.id);
-    //
-    // })
+    eventEmmitter.on('deleteAtmFromArr', () => {
+      this.deleteAtm()
+    })
   }
 
   serviseByisFree () {
@@ -21,5 +20,14 @@ export default class ATM {
     if (this.isFree) {
       eventEmmitter.emit('atmIsBusy', this)
     }
+  }
+
+  deleteAtm () {
+    console.log(this.id)
+    let f = atmsArr.indexOf(this)
+    console.log(f)
+    console.log(atmsArr)
+    atmsArr.splice(f, 1)
+    console.log(atmsArr)
   }
 }
