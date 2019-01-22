@@ -7,15 +7,15 @@ class EventEmmitter {
     if (!this.eventTable[eventName]) {
       this.eventTable[eventName] = []
     }
-    this.eventTable[eventName].push(fn);
+    this.eventTable[eventName].push(fn)
 
-    var self = this;
+    var self = this
     return function () {
       self.eventTable[eventName] = self.eventTable[eventName].filter(eventFunc => { return fn !== eventFunc })
     }
   };
   emit (eventName, param1, param2, param3, param4) {
-    const event = this.eventTable[eventName];
+    const event = this.eventTable[eventName]
     if (event) {
       event.map(fn => {
         return fn.call(this, param1, param2, param3, param4)
@@ -24,5 +24,4 @@ class EventEmmitter {
   };
 }
 
-export default new EventEmmitter();
-
+export default new EventEmmitter()

@@ -1,35 +1,22 @@
-
-import ATM from './components/atm/ATM'
-import AtmComponent from './components/atm/AtmComponent'
-import Queue from './components/queue/Queue'
 import QueueComponent from './components/queue/QueueComponent'
 import './style.css'
-import * as events from "./components/utils/events";
-import generateRandomSec from "./components/others/generateRandomSec";
-import AddAtmBtm from "./components/deleteAtmBtn/DeleteAtmBtn";
+import * as events from './components/utils/events'
+import generateRandomSec from './components/others/generateRandomSec'
 
-import createAtm, {atmsArr} from "./components/utils/events"
-import eventEmmitter from "./components/eventEmmitter/EventEmmitter";
+let input1 = document.querySelector('.input1')
+let input2 = document.querySelector('.input2')
 
-let atmContainer = document.getElementById('atmContainer');
-let queueContainer = document.getElementById('queueContainer');
+let queueComponent = new QueueComponent()
 
+events.queue.init()
 
-// let queue = new Queue(queueContainer);
-let queueComponent = new QueueComponent();
+setInterval(() => {
+  events.queue.addPerson()
+}, generateRandomSec(input1.value = 2, input2.value = 4))
 
+setInterval(() => {
+  // console.log(events.queue.count)
+  events.queue.checkFreeAtm()
+}, 1000)
 
-events.queue.init();
-
-
-    setInterval(() => {
-        events.queue.addPerson();
-    }, generateRandomSec(2, 4));
-
-
-setInterval( () => {
-    // console.log(events.queue.count)
-    events.queue.checkFreeAtm();
-}, 1000);
-
-console.log(atmsArr)
+console.log(events.atmsArr)

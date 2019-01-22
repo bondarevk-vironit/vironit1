@@ -53,3 +53,12 @@ p {
     top: 4%;
     bottom: 0;
 }
+.addSec {
+    width:40px;
+    height: 20px;
+    margin-left: 10px;
+}
+#inputsDiv {
+    margin: 0 auto;
+    width: 400px;
+}
