@@ -25,6 +25,14 @@ eventEmmitter.on('findFreeAtm', () => {
     if (item.isFree === true && queue.count > 0) {
       item.serviseByisFree()
     }
+     new Promise(function (resolve, reject) {
+      if(queue.count === 10) {
+        console.log('it promise')
+        createATMwithFunc(createAtm)
+        resolve()
+      }
+    })
+
   })
 })
 
@@ -43,6 +51,14 @@ eventEmmitter.on('atmIsFree', (atm) => {
     atm.isFree = true
     eventEmmitter.emit('updateCounter', atm.isFree, atm.renderAtm.counterAtm.countAtm, atm)
   }, 1000)
+  new Promise(function (resolve, reject) {
+    if(queue.count <= 4 && atmsArr.length > 1) {
+      console.log('it promise delete')
+     atm.deleteAtm()
+      eventEmmitter.emit('deleteAtm')
+      resolve()
+    }
+  })
 })
 
 function createATMwithFunc (create) {
@@ -54,5 +70,7 @@ document.getElementById('addBtn').addEventListener('click', () => {
   createATMwithFunc(createAtm)
   console.log(atmsArr)
 })
+
+console.log(atmsArr)
 
 export { atmsArr, queue }
