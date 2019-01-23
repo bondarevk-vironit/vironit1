@@ -8,7 +8,7 @@ export default class ATM {
     this.parent = parent
     this.isFree = true
     this.renderAtm = new AtmComponent(this.id, this.parent)
-    eventEmmitter.on('deleteAtmFromArr', () => {
+    eventEmmitter.on(`deleteAtmFromArr${this.id}`, () => {
       this.deleteAtm()
     })
   }
@@ -23,11 +23,7 @@ export default class ATM {
   }
 
   deleteAtm () {
-    console.log(this.id)
     let f = atmsArr.indexOf(this)
-    console.log(f)
-    console.log(atmsArr)
     atmsArr.splice(f, 1)
-    console.log(atmsArr)
   }
 }

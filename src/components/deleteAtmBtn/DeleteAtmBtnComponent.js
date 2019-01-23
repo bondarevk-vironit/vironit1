@@ -9,7 +9,7 @@ export default class DeleteAtmBtnComponent {
     this.element = this.commonComponent.strToDom(this.create())
     this.element.addEventListener('click', () => {
       eventEmmitter.emit('deleteAtm', this.element.parentElement.id, this)
-      eventEmmitter.emit('deleteAtmFromArr')
+      eventEmmitter.emit(`deleteAtmFromArr${this.id}`)
     })
   }
 

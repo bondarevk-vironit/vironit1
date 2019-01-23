@@ -9,8 +9,8 @@ export default class CounterAtm {
     this.renderCounterAtm = new CounterAtmComponent(this.id, this.countAtm)
     eventEmmitter.on('addPerson', (elem) => {
       if (elem.id === this.id) {
-        console.log('each count of atm', this.id, this.countAtm)
-        console.log('m aloneeeee')
+        // console.log('each count of atm', this.id, this.countAtm)
+        // console.log('m aloneeeee')
         this.countAtm++
       }
     })
