@@ -1,6 +1,6 @@
 export default function generateRandomSec (from, to) {
   from = from || 2
   to = to || 4
-  var sec = Math.floor(from + Math.random() * (to + 1 - from))
+  var sec = (from + Math.random() * (to - from)).toFixed(2)
   return sec * 1000
 }
