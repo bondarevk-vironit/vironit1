@@ -13,12 +13,22 @@ export default function createAtm () {
   let newATM = new ATM('atm' + ++i, atmContainer)
   newATM.renderAtm.render(newATM.id, newATM.parent, newATM.isFree)
   newATM.renderAtm.counterAtm.renderCounterAtm.render(newATM.isFree, newATM.renderAtm.counterAtm.countAtm)
+
   // axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
   //   .then(res => {
   //     alert(res.data.bitcoin.usd)
   //   })
   return newATM
 }
+
+fetch('http://localhost:3000/api/atms/createAtm', {
+  method: 'post',
+  mode: 'no-cors',
+})
+    .then((res) => {
+      console.log('res.body')
+    })
+    .catch(err => console.log('No send data to host'))
 
 eventEmmitter.on('findFreeAtm', () => {
   atmsArr.find((item) => {
