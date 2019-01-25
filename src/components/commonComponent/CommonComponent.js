@@ -1,9 +1,4 @@
-
 export default class CommonComponent {
-  constructor () {
-
-  }
-
   strToDom (template) {
     let [ , openTag, content ] = /<(.+?)>(.+)<\/.+>/.exec(template)
     let tagName = /\w+/.exec(openTag)

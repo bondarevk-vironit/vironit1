@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import ATM from '../atm/ATM'
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import Queue from '../queue/Queue'
@@ -32,7 +32,6 @@ eventEmmitter.on('findFreeAtm', () => {
     //     resolve(newAtmCreated)
     //   }
     // })
-
   })
 })
 

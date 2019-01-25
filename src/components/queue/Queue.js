@@ -22,8 +22,6 @@ export default class Queue {
     }
   }
 
-
-
   init () {
     eventEmmitter.emit('QueueRender', this.parent, this.count)
   }

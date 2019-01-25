@@ -1,6 +1,6 @@
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import AtmComponent from './AtmComponent'
-import {atmsArr} from "../utils/events";
+import { atmsArr } from '../utils/events'
 
 export default class ATM {
   constructor (id, parent) {
