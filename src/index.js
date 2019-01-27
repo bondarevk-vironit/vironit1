@@ -42,4 +42,19 @@ input2.addEventListener('change', (e) => {
     console.log('change input value')
 })
 
+function initPage () {
+ fetch('http://localhost:3000/api/atms', {
+    method: 'get',
+    mode: 'no-cors',
+  })
+      .then((res) => {
+        console.log(res)
+
+
+      })
+      .catch(err => console.log('No send data to host'))
+}
+
+initPage()
+
 console.log(events.atmsArr)

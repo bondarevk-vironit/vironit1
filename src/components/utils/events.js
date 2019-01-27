@@ -21,14 +21,6 @@ export default function createAtm () {
   return newATM
 }
 
-fetch('http://localhost:3000/api/atms/createAtm', {
-  method: 'post',
-  mode: 'no-cors',
-})
-    .then((res) => {
-      console.log('res.body')
-    })
-    .catch(err => console.log('No send data to host'))
 
 eventEmmitter.on('findFreeAtm', () => {
   atmsArr.find((item) => {
@@ -80,6 +72,7 @@ document.getElementById('addBtn').addEventListener('click', () => {
   createATMwithFunc(createAtm)
   console.log(atmsArr)
 })
+
 
 console.log(atmsArr)
 
