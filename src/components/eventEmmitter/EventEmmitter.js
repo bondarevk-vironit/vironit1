@@ -10,6 +10,7 @@ class EventEmmitter {
     this.eventTable[eventName].push(fn)
 
     var self = this
+    // лучше заменить на () => { и убрать self
     return function () {
       self.eventTable[eventName] = self.eventTable[eventName].filter(eventFunc => { return fn !== eventFunc })
     }

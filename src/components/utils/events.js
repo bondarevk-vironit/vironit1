@@ -3,14 +3,14 @@ import ATM from '../atm/ATM'
 import eventEmmitter from '../eventEmmitter/EventEmmitter'
 import Queue from '../queue/Queue'
 import generateRandomSec from '../others/generateRandomSec'
-let i = 0
-let atmContainer = document.getElementById('atmContainer')
-let queueContainer = document.getElementById('queueContainer')
-let atmsArr = []
-let queue = new Queue(queueContainer)
+let i = 0 // используй другое название для переменной
+let atmContainer = document.getElementById('atmContainer') // const
+let queueContainer = document.getElementById('queueContainer') // const
+let atmsArr = [] // const
+let queue = new Queue(queueContainer) // const
 
 export default function createAtm () {
-  let newATM = new ATM('atm' + ++i, atmContainer)
+  let newATM = new ATM('atm' + ++i, atmContainer) // const
   newATM.renderAtm.render(newATM.id, newATM.parent, newATM.isFree)
   newATM.renderAtm.counterAtm.renderCounterAtm.render(newATM.isFree, newATM.renderAtm.counterAtm.countAtm)
   // axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')

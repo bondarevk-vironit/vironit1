@@ -16,8 +16,9 @@ export default class CounterAtmComponent {
     })
   }
 
+  // Почему crate не создает, а возвращает константный текст?
   create () {
-    return `<div class="counter"> </div>`
+    return `<div class="counter"> </div>` // this.commonComponent.strToDom(`<div class="counter"> </div>`)
   }
 
   render (state, countAtm) {
